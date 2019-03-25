@@ -20,12 +20,17 @@ class TrelloToken(TrelloAPI.TrelloApi):
         r = requests.get(self.tokenURL)
         self.log('Status Code: ' + str(r.status_code))
         pprint.pprint(r.json())
-        self.tokenInfo = r.json()
-        return r.json()
-
+        self.tokenInfo = r
+        return r
 
     def getIDMember(self):
         self.log()
-        i = self.tokenInfo['idMember']
+        i = self.tokenInfo.json()['idMember']
         self.log(i)
+        return i
+
+    def getStatusCode(self):
+        self.log()
+        i = self.tokenInfo.status_code
+        self.log(str(i))
         return i

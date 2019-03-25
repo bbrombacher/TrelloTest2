@@ -21,3 +21,12 @@ class TrelloApi():
         else:
             print(inspect.stack()[1].function + ': ' + message)
 
+    def getActualKeys(self, json):
+        self.log()
+        actualkeys = []
+        for x in json:
+            actualkeys.append(x)
+        self.log('actual keys: ' + str(actualkeys))
+        self.log('actual keys length: ' + str(len(actualkeys)))
+
+        return actualkeys
