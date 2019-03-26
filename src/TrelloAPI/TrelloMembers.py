@@ -1,21 +1,25 @@
-import sys
-from .TrelloAPI import TrelloApi
-
+from src.TrelloAPI import TrelloAPI
 import requests
 import pprint
-import inspect
 
-class TrelloMembers(object):
 
-    def __init__(self):
-        self.user = TrelloApi('1935e1c580f75d052d9e43373518994da776ebd81f43c9763bea3a5509f0dd4a')
+class TrelloMembers(TrelloAPI.TrelloApi):
+    membersInfo = None
 
-    def getMembersInfo(self):
+    def __init__(self, user_token, id_member):
         self.log()
+        super().__init__(user_token)
+        self.tokenKey = '?token=' + self.user_token + '&key=' + self.apiKey
+        self.log(self.tokenKey)
+        self.membersURL = self.baseURL + '/members/' + id_member + self.tokenKey
+        self.log(self.membersURL)
+
+    def requestMembersInfo(self):
         self.log()
         r = requests.get(self.membersURL)
-        pprint.pprint(r.json())
-        return r.json()
+        self.membersInfo = r
+        self.log(str(self.membersInfo.status_code))
+        return r
 
     def getMembersActions(self):
         self.log()

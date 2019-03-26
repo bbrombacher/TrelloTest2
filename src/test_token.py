@@ -6,6 +6,7 @@ class TestToken(object):
 
     expected_top_keys = ['id', 'identifier', 'idMember', 'dateCreated', 'dateExpires', 'permissions']
     expected_permissions_keys = ['idModel', 'modelType', 'read', 'write']
+    expected_status_code = 200
 
     @pytest.fixture
     def trello(self):
@@ -15,7 +16,7 @@ class TestToken(object):
 
     def test_statusCode(self, trello):
         trello.log()
-        assert trello.getStatusCode() == 200
+        assert trello.getStatusCode() == self.expected_status_code
 
     def test_verifyTopKeys(self, trello):
         trello.log()
