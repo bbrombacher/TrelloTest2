@@ -16,10 +16,13 @@ class TrelloApi():
 #utility methods
 
     def log(self, message=None):
+        # str(inspect.stack()[1].filename
         if message is None:
-            print(inspect.stack()[1].function)
+            print(str(inspect.getmodulename(inspect.stack()[1].filename)) + ': ' +
+                  inspect.stack()[1].function)
         else:
-            print(inspect.stack()[1].function + ': ' + message)
+            print(str(inspect.getmodulename(inspect.stack()[1].filename)) + ': ' +
+                  inspect.stack()[1].function + ': ' + message)
 
     def getActualKeys(self, json):
         self.log()
