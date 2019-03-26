@@ -19,6 +19,7 @@ class TrelloMembers(TrelloAPI.TrelloApi):
         r = requests.get(self.membersURL)
         self.membersInfo = r
         self.log(str(self.membersInfo.status_code))
+        self.log(str(r.json()))
         return r
 
     def getMembersActions(self):
