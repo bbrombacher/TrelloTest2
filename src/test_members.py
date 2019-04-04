@@ -6,13 +6,12 @@ import pytest
 
 class TestMembers(object):
     expected_status_code = 200
-    expected_top_keys = ['id', 'avatarHash', 'avatarUrl', 'bio', 'bioData', 'confirmed',
-                         'fullName', 'idEnterprise', 'idEnterprisesDeactivated', 'idPremOrgsAdmin',
-                         'initials', 'memberType', 'nonPublic', 'nonPublicAvailable', 'products',
-                         'status', 'url', 'username', 'aaEmail', 'aaId', 'avatarSource', 'email',
-                         'idMemberReferrer', 'gravatarHash', 'idBoards', 'idOrganizations',
-                         'idEnterprisesAdmin', 'limits', 'loginTypes', 'marketingOptIn', 'messagesDismissed',
-                         'oneTimeMessagesDismissed', 'prefs', 'trophies', 'uploadedAvatarHash',
+    expected_top_keys = ['id', 'avatarHash', 'avatarUrl', 'bio', 'bioData', 'confirmed', 'fullName',
+                         'idEnterprise', 'idEnterprisesDeactivated', 'idMemberReferrer', 'idPremOrgsAdmin',
+                         'initials', 'memberType', 'nonPublic', 'nonPublicAvailable', 'products', 'status', 'url',
+                         'username', 'aaEmail', 'aaId', 'avatarSource', 'email', 'gravatarHash', 'idBoards',
+                         'idOrganizations', 'idEnterprisesAdmin', 'limits', 'loginTypes', 'marketingOptIn',
+                         'messagesDismissed', 'oneTimeMessagesDismissed', 'prefs', 'trophies', 'uploadedAvatarHash',
                          'uploadedAvatarUrl', 'premiumFeatures', 'isAaMastered', 'idBoardsPinned']
 
     expected_keys_limits = ['boards', 'orgs']
@@ -41,7 +40,6 @@ class TestMembers(object):
 
     def test_verifyKeysLimits(self, trello):
         trello.log()
-        #pprint.pprint(trello.membersInfo.json()['limits'])
         actual_keys_limits = trello.getActualKeys(trello.membersInfo.json()['limits'])
         actual_keys_limits_boards = trello.getActualKeys(trello.membersInfo.json()['limits']['boards'])
         actual_keys_limits_boards_totalPerMember = trello.getActualKeys(trello.membersInfo.json()['limits']['boards']['totalPerMember'])
@@ -54,5 +52,6 @@ class TestMembers(object):
         assert actual_keys_limits_orgs == self.expected_keys_limits_orgs
         assert actual_keys_limits_orgs_totalPerMember == self.expected_keys_limits_orgs_totalPerMember
 
-    # prefs
+    def test_verifyKeysPrefs(self,trello):
+        trello.log()
 

@@ -18,12 +18,12 @@ class TestToken(object):
         trello.log()
         assert trello.getStatusCode() == self.expected_status_code
 
-    def test_verifyTopKeys(self, trello):
+    def test_verifyKeysTop(self, trello):
         trello.log()
         actual_keys = trello.getActualKeys(trello.tokenInfo.json())
         assert actual_keys == self.expected_top_keys
 
-    def test_verifyPermissionkeys(self, trello):
+    def test_verifyKeysPermissions(self, trello):
         trello.log()
         actual_keys = trello.getActualKeys(trello.tokenInfo.json()['permissions'][0])
         assert actual_keys == self.expected_permissions_keys
