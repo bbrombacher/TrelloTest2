@@ -29,6 +29,8 @@ class TrelloApi():
         actualkeys = []
         for x in json:
             actualkeys.append(x)
+
+
         self.log('actual keys: ' + str(actualkeys))
         self.log('actual keys length: ' + str(len(actualkeys)))
 
