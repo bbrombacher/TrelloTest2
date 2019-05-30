@@ -1,32 +1,41 @@
 from src.TrelloAPI import TrelloAPI
+
 import requests
 import pprint
 
 
 class TrelloMembers(TrelloAPI.TrelloApi):
-    membersInfo = None
 
-    def __init__(self, user_token, id_member):
+    def __init__(self, user_token, member_id):
         self.log()
         super().__init__(user_token)
-        self.tokenKey = '?token=' + self.user_token + '&key=' + self.apiKey
-        self.log(self.tokenKey)
-        self.membersURL = self.baseURL + '/members/' + id_member + self.tokenKey
-        self.log(self.membersURL)
+        self.member_id = member_id
 
-    def requestMembersInfo(self):
+
+    def requestMember(self):
+        #https://developers.trello.com/reference#membersid
         self.log()
-        r = requests.get(self.membersURL)
-        self.membersInfo = r
-        self.log(str(self.membersInfo.status_code))
+        members_url = self.baseURL + '/members/' + self.member_id + self.tokenKey
+        self.log(members_url)
+        r = requests.get(members_url)
+        self.log(str(r.status_code))
         self.log(str(r.json()))
         return r
 
-    def getMembersActions(self):
+    def requestMemberField(self, field):
+        #https://developers.trello.com/reference#membersidfield
+        self.log()
+        members_field_url = self.baseURL + '/members/' + self.member_id + '/' + field + self.tokenKey
+        r = requests.get(members_field_url)
+        self.log(str(r.status_code))
+        self.log(str(r.json))
+        return r
+
+    def requestMembersActions(self):
         self.log()
 
-    def getMembersBoards(self):
+    def requestMembersBoards(self):
         self.log()
 
-    def getMembersBoardBackgrounds(self):
+    def requestMembersBoardBackgrounds(self):
         self.log()

@@ -9,8 +9,9 @@ class TrelloApi():
         self.apiKey = '84c263c996f3197cae36c9af02352a9d'
         # the token manually created from my own account to perform local testing.
         # in a real application this token will need to be acquired on a per user basis.
-        self.user_token = '1935e1c580f75d052d9e43373518994da776ebd81f43c9763bea3a5509f0dd4a'
+        self.user_token = user_token #'1935e1c580f75d052d9e43373518994da776ebd81f43c9763bea3a5509f0dd4a'
         self.baseURL = 'https://api.trello.com/1'
+        self.tokenKey = '?token=' + self.user_token + '&key=' + self.apiKey
 
 
 #utility methods
