@@ -1,4 +1,5 @@
 from .TrelloAPI import TrelloToken
+from .Utility import utils
 import pytest
 
 
@@ -19,15 +20,15 @@ class TestToken(object):
         return a
 
     def test_statusCode(self, trelloToken):
-        trelloToken.log()
+        utils.log()
         assert self.actual_status_code == self.expected_status_code
 
     def test_verifyKeysTop(self, trelloToken):
-        trelloToken.log()
-        actual_keys = trelloToken.getActualKeys(self.token_info)
+        utils.log()
+        actual_keys = utils.getActualKeys(self.token_info)
         assert actual_keys == self.expected_top_keys
 
     def test_verifyKeysPermissions(self, trelloToken):
-        trelloToken.log()
-        actual_keys = trelloToken.getActualKeys(self.token_info['permissions'][0])
+        utils.log()
+        actual_keys = utils.getActualKeys(self.token_info['permissions'][0])
         assert actual_keys == self.expected_permissions_keys

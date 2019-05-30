@@ -1,7 +1,6 @@
 from .TrelloAPI import TrelloToken
 from .TrelloAPI import TrelloMembers
-import pprint
-
+from .Utility import utils
 import pytest
 
 class TestMemberId(object):
@@ -54,20 +53,21 @@ class TestMemberId(object):
         return b
 
     def test_positiveStatusCode(self, trelloMemberField):
-        trelloMemberField.log()
+        utils.log()
         r = trelloMemberField.requestMemberField(self.email_field)
         assert r.status_code == self.positive_expected_status_code
 
     def test_negativeStatusCode(self, trelloMemberField):
-        trelloMemberField.log()
+        utils.log()
         r = trelloMemberField.requestMemberField(self.nonexistant_field)
         assert r.status_code == self.negative_expected_status_code
 
     def test_verifyEmailField(self, trelloMemberField):
-        trelloMemberField.log()
+        utils.log()
         r = trelloMemberField.requestMemberField(self.email_field)
-        trelloMemberField.log(str(r.json()))
-        assert 0
+        utils.log(str(r.json()))
+        actual_keys = utils.getActualKeys(r.json())
+        assert actual_keys == self.expected_email_response_keys
 
 
 

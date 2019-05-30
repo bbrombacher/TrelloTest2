@@ -1,5 +1,7 @@
 from .TrelloAPI import TrelloToken
 from .TrelloAPI import TrelloMembers
+from .Utility import utils
+
 import pprint
 
 import pytest
@@ -35,21 +37,22 @@ class TestMembers(object):
         return b
 
     def test_statusCode(self, trelloMember):
-        trelloMember.log()
+        #trelloMember.log()
+        utils.log()
         assert self.actual_status_code == self.expected_status_code
 
     def test_verifyKeysTop(self, trelloMember):
-        trelloMember.log()
-        actual_keys = trelloMember.getActualKeys(self.member_info)
+        utils.log()
+        actual_keys = utils.getActualKeys(self.member_info)
         assert actual_keys.sort() == self.expected_top_keys.sort()
 
     def test_verifyKeysLimits(self, trelloMember):
-        trelloMember.log()
-        actual_keys_limits = trelloMember.getActualKeys(self.member_info['limits'])
-        actual_keys_limits_boards = trelloMember.getActualKeys(self.member_info['limits']['boards'])
-        actual_keys_limits_boards_totalPerMember = trelloMember.getActualKeys(self.member_info['limits']['boards']['totalPerMember'])
-        actual_keys_limits_orgs = trelloMember.getActualKeys(self.member_info['limits']['orgs'])
-        actual_keys_limits_orgs_totalPerMember = trelloMember.getActualKeys(self.member_info['limits']['orgs']['totalPerMember'])
+        utils.log()
+        actual_keys_limits = utils.getActualKeys(self.member_info['limits'])
+        actual_keys_limits_boards = utils.getActualKeys(self.member_info['limits']['boards'])
+        actual_keys_limits_boards_totalPerMember = utils.getActualKeys(self.member_info['limits']['boards']['totalPerMember'])
+        actual_keys_limits_orgs = utils.getActualKeys(self.member_info['limits']['orgs'])
+        actual_keys_limits_orgs_totalPerMember = utils.getActualKeys(self.member_info['limits']['orgs']['totalPerMember'])
 
         assert actual_keys_limits.sort() == self.expected_keys_limits.sort()
         assert actual_keys_limits_boards.sort() == self.expected_keys_limits_boards.sort()
@@ -58,5 +61,5 @@ class TestMembers(object):
         assert actual_keys_limits_orgs_totalPerMember.sort() == self.expected_keys_limits_orgs_totalPerMember.sort()
 
     def test_verifyKeysPrefs(self, trelloMember):
-        trelloMember.log()
+        utils.log()
 

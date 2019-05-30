@@ -1,6 +1,7 @@
 import requests
 import pprint
 import inspect
+from src.Utility import utils
 
 
 class TrelloApi():
@@ -26,13 +27,13 @@ class TrelloApi():
                   inspect.stack()[1].function + ': ' + message)
 
     def getActualKeys(self, json):
-        self.log()
+        utils.log()
         actualkeys = []
         for x in json:
             actualkeys.append(x)
 
 
-        self.log('actual keys: ' + str(actualkeys))
-        self.log('actual keys length: ' + str(len(actualkeys)))
+        utils.log('actual keys: ' + str(actualkeys))
+        utils.log('actual keys length: ' + str(len(actualkeys)))
 
         return actualkeys
