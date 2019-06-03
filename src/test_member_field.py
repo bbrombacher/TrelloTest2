@@ -40,6 +40,7 @@ class TestMemberId(object):
 
 
     #expected field responses
+    expected_avatar_hash_response_keys = ['_value']
     expected_email_response_keys = ['_value']
 
 
@@ -68,6 +69,13 @@ class TestMemberId(object):
         utils.log(str(r.json()))
         actual_keys = utils.getActualKeys(r.json())
         assert actual_keys == self.expected_email_response_keys
+
+    def test_verifyAvatarHash(self, trelloMemberField):
+        utils.log()
+        r = trelloMemberField.requestMemberField(self.avatarHash_field)
+        utils.log(str(r.json()))
+        actual_keys = utils.getActualKeys(r.json())
+        assert actual_keys == self.expected_avatar_hash_response_keys
 
 
 

@@ -14,6 +14,7 @@ class TrelloToken(TrelloAPI.TrelloApi):
 
 
     def requestTokenInfo(self):
+        #https://developers.trello.com/reference#tokens
         utils.log()
         r = requests.get(self.tokenURL)
         utils.log('Status Code: ' + str(r.status_code))

@@ -16,6 +16,7 @@ class TrelloApi():
 
 
 #utility methods
+    #these should no longer be needed with the inclusion of the utils module
 
     def log(self, message=None):
         # str(inspect.stack()[1].filename
