@@ -20,29 +20,24 @@ class TrelloMembers(TrelloAPI.TrelloApi):
         members_url = self.baseURL + '/members/' + self.member_id + self.tokenKey
         utils.log(members_url)
         r = requests.get(members_url)
-        utils.log(str(r.status_code))
-        utils.log(str(r.json()))
+        utils.log(r.text)
         return r
 
     def requestMemberField(self, field):
         #https://developers.trello.com/reference#membersidfield
         utils.log()
         members_field_url = self.baseURL + '/members/' + self.member_id + '/' + field + self.tokenKey
+        utils.log(members_field_url)
         r = requests.get(members_field_url)
-        utils.log(str(r.status_code))
-        utils.log(str(r.json))
+        utils.log(r.text)
         return r
 
-    def requestMembersBoards(self,query_params):
+    def requestMembersBoards(self, query_params):
         #https://developers.trello.com/reference#membersidboards
         utils.log()
         members_boards_url = self.baseURL + '/members/' + self.member_id + self.tokenKey
+        utils.log(members_boards_url)
         r = requests.get(members_boards_url, params=query_params)
-        pprint.pprint(r.json())
+        pprint.pprint(r.text)
         return r
 
-    def requestMembersActions(self):
-        utils.log()
-
-    def requestMembersBoardBackgrounds(self):
-        utils.log()

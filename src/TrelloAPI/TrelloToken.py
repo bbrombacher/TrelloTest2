@@ -1,5 +1,4 @@
 import requests
-import pprint
 from src.TrelloAPI import TrelloAPI
 from src.Utility import utils
 
@@ -16,9 +15,9 @@ class TrelloToken(TrelloAPI.TrelloApi):
     def requestTokenInfo(self):
         #https://developers.trello.com/reference#tokens
         utils.log()
+        utils.log(self.tokenURL)
         r = requests.get(self.tokenURL)
-        utils.log('Status Code: ' + str(r.status_code))
-        pprint.pprint(r.json())
+        utils.log(r.text)
         self.tokenInfo = r
         return r
 
