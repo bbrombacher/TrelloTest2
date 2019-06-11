@@ -15,6 +15,7 @@ class TrelloMembers(TrelloAPI.TrelloApi):
 
     def requestMember(self):
         #https://developers.trello.com/reference#membersid
+        #get a member
         utils.log()
         members_url = self.baseURL + '/members/' + self.member_id + self.tokenKey
         utils.log(members_url)
@@ -40,3 +41,17 @@ class TrelloMembers(TrelloAPI.TrelloApi):
 
     def requestMembersBoardBackgrounds(self):
         utils.log()
+
+    def putMember(self):
+        #https://developers.trello.com/reference#membersid-1
+        #update a member
+        utils.log()
+        get_members_url = self.baseURL + '/members/' + self.member_id
+        querystring = {'bio': 'a bio', 'key': self.apiKey, 'token': self.user_token}
+        r = requests.request("PUT", get_members_url, params=querystring)
+        utils.log(get_members_url)
+        utils.log(querystring['bio'])
+        utils.log(str(r.status_code))
+        utils.log(r.text)
+        utils.log(str(r.headers))
+        return r

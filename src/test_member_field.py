@@ -47,9 +47,9 @@ class TestMemberId(object):
 
     @pytest.fixture
     def trelloMemberField(self):
-        a = TrelloToken.TrelloToken('1935e1c580f75d052d9e43373518994da776ebd81f43c9763bea3a5509f0dd4a')
+        a = TrelloToken.TrelloToken('d162d502aa68a59be4b15279a2fafebeb33b93a4282e2ff0c96e7babf6a16514')
         a.requestTokenInfo()
-        b = TrelloMembers.TrelloMembers('1935e1c580f75d052d9e43373518994da776ebd81f43c9763bea3a5509f0dd4a',
+        b = TrelloMembers.TrelloMembers('d162d502aa68a59be4b15279a2fafebeb33b93a4282e2ff0c96e7babf6a16514',
                                         a.getIDMember())
         return b
 

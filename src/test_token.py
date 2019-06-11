@@ -13,7 +13,7 @@ class TestToken(object):
 
     @pytest.fixture
     def trelloToken(self):
-        a = TrelloToken.TrelloToken('1935e1c580f75d052d9e43373518994da776ebd81f43c9763bea3a5509f0dd4a')
+        a = TrelloToken.TrelloToken('d162d502aa68a59be4b15279a2fafebeb33b93a4282e2ff0c96e7babf6a16514')
         r = a.requestTokenInfo()
         self.token_info = r.json()
         self.actual_status_code = r.status_code
