@@ -43,13 +43,13 @@ class TestMemberId(object):
     expected_avatar_hash_response_keys = ['_value']
     expected_email_response_keys = ['_value']
 
-
+    user_token = 'd162d502aa68a59be4b15279a2fafebeb33b93a4282e2ff0c96e7babf6a16514'
 
     @pytest.fixture
     def trelloMemberField(self):
-        a = TrelloToken.TrelloToken('d162d502aa68a59be4b15279a2fafebeb33b93a4282e2ff0c96e7babf6a16514')
+        a = TrelloToken.TrelloToken(self.user_token)
         a.requestTokenInfo()
-        b = TrelloMembers.TrelloMembers('d162d502aa68a59be4b15279a2fafebeb33b93a4282e2ff0c96e7babf6a16514',
+        b = TrelloMembers.TrelloMembers(self.user_token,
                                         a.getIDMember())
         return b
 
