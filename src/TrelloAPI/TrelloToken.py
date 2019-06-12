@@ -4,23 +4,23 @@ from src.Utility import utils
 
 class TrelloToken(TrelloAPI.TrelloApi):
 
-    tokenInfo = None
 
     def __init__(self, user_token):
         utils.log()
         super().__init__(user_token)
-        self.tokenURL = self.baseURL + '/tokens/' + self.user_token + self.tokenKey
 
 
     def requestTokenInfo(self):
         #https://developers.trello.com/reference#tokens
         utils.log()
-        utils.log(self.tokenURL)
-        r = requests.get(self.tokenURL)
+        token_url = self.baseURL + '/tokens/' + self.user_token + self.tokenKey
+        utils.log(token_url)
+        r = requests.get(token_url)
         utils.log(r.text)
-        self.tokenInfo = r
         return r
 
+
+#should be able to remove the code below
     def getIDMember(self):
         utils.log()
         i = self.tokenInfo.json()['idMember']

@@ -7,8 +7,18 @@ import pprint
 import pytest
 
 class TestMembers(object):
+    #actual values
     member_info = ''
     actual_status_code = 0
+
+    actual_keys_top = []
+    actual_keys_limits = []
+    actual_keys_limits_boards = []
+    actual_keys_limits_boards_totalPerMember = []
+    actual_keys_limits_orgs = []
+    actual_keys_limits_orgs_totalPerMember = []
+
+    #expected values
     expected_status_code = 200
     expected_top_keys = ['id', 'avatarHash', 'avatarUrl', 'bio', 'bioData', 'confirmed', 'fullName',
                          'idEnterprise', 'idEnterprisesDeactivated', 'idMemberReferrer', 'idPremOrgsAdmin',
@@ -29,13 +39,23 @@ class TestMembers(object):
     @pytest.fixture
     def trelloMember(self):
         a = TrelloToken.TrelloToken(self.user_token)
-        a.requestTokenInfo()
-
+        r = a.requestTokenInfo()
         b = TrelloMembers.TrelloMembers(self.user_token,
-                                        a.getIDMember())
-        r = b.requestMember()
-        self.member_info = r.json()
-        self.actual_status_code = r.status_code
+                                        r.json()['idMember'])
+
+        rr = b.requestMember()
+
+        #actual status code
+        self.actual_status_code = rr.status_code
+
+        #actual keys
+        self.actual_keys_top = utils.getActualKeys(rr.json())
+        self.actual_keys_limits = utils.getActualKeys(rr.json()['limits'])
+        self.actual_keys_limits_boards = utils.getActualKeys(rr.json()['limits']['boards'])
+        self.actual_keys_limits_boards_totalPerMember = utils.getActualKeys(rr.json()['limits']['boards']['totalPerMember'])
+        self.actual_keys_limits_orgs = utils.getActualKeys(rr.json()['limits']['orgs'])
+        self.actual_keys_limits_orgs_totalPerMember = utils.getActualKeys(rr.json()['limits']['orgs']['totalPerMember'])
+
         return b
 
     def test_statusCode(self, trelloMember):
@@ -44,23 +64,15 @@ class TestMembers(object):
 
     def test_verifyKeysTop(self, trelloMember):
         utils.log()
-        actual_keys = utils.getActualKeys(self.member_info)
-        assert actual_keys.sort() == self.expected_top_keys.sort()
+        assert self.actual_keys_top.sort() == self.expected_top_keys.sort()
 
     def test_verifyKeysLimits(self, trelloMember):
         utils.log()
-        actual_keys_limits = utils.getActualKeys(self.member_info['limits'])
-        actual_keys_limits_boards = utils.getActualKeys(self.member_info['limits']['boards'])
-        actual_keys_limits_boards_totalPerMember = utils.getActualKeys(self.member_info['limits']['boards']['totalPerMember'])
-        actual_keys_limits_orgs = utils.getActualKeys(self.member_info['limits']['orgs'])
-        actual_keys_limits_orgs_totalPerMember = utils.getActualKeys(self.member_info['limits']['orgs']['totalPerMember'])
+        assert self.actual_keys_limits.sort() == self.expected_keys_limits.sort()
+        assert self.actual_keys_limits_boards.sort() == self.expected_keys_limits_boards.sort()
+        assert self.actual_keys_limits_boards_totalPerMember.sort() == self.expected_keys_limits_boards_totalPerMember.sort()
+        assert self.actual_keys_limits_orgs.sort() == self.expected_keys_limits_orgs.sort()
+        assert self.actual_keys_limits_orgs_totalPerMember.sort() == self.expected_keys_limits_orgs_totalPerMember.sort()
 
-        assert actual_keys_limits.sort() == self.expected_keys_limits.sort()
-        assert actual_keys_limits_boards.sort() == self.expected_keys_limits_boards.sort()
-        assert actual_keys_limits_boards_totalPerMember.sort() == self.expected_keys_limits_boards_totalPerMember.sort()
-        assert actual_keys_limits_orgs.sort() == self.expected_keys_limits_orgs.sort()
-        assert actual_keys_limits_orgs_totalPerMember.sort() == self.expected_keys_limits_orgs_totalPerMember.sort()
 
-    def test_verifyKeysPrefs(self, trelloMember):
-        utils.log()
 

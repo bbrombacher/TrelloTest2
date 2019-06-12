@@ -15,7 +15,6 @@ class TrelloMembers(TrelloAPI.TrelloApi):
 
     def requestMember(self):
         #https://developers.trello.com/reference#membersid
-        #get a member
         utils.log()
         members_url = self.baseURL + '/members/' + self.member_id + self.tokenKey
         utils.log(members_url)
@@ -38,6 +37,6 @@ class TrelloMembers(TrelloAPI.TrelloApi):
         members_boards_url = self.baseURL + '/members/' + self.member_id + self.tokenKey
         utils.log(members_boards_url)
         r = requests.get(members_boards_url, params=query_params)
-        pprint.pprint(r.text)
+        utils.log(r.text)
         return r
 

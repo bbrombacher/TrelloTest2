@@ -10,3 +10,4 @@ class TrelloApi():
         self.user_token = user_token #'d162d502aa68a59be4b15279a2fafebeb33b93a4282e2ff0c96e7babf6a16514'
         self.baseURL = 'https://api.trello.com/1'
         self.tokenKey = '?token=' + self.user_token + '&key=' + self.apiKey
+
