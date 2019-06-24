@@ -43,14 +43,13 @@ class TestBoards(object):
     @pytest.fixture
     def trelloBoardObject(self):
         b = TrelloBoards.TrelloBoards(self.user_token)
-
-        utils.log('board_zero: ' + str(self.board_zero))
         return b
 
     def test_statusCode(self, trelloMember, trelloBoardObject):
         utils.log()
         board = self.getBoard(self.board_ids[0], trelloBoardObject)
         assert board.status_code == self.expected_status_code
+
 
     def test_updateBoardDescription(self, trelloMember, trelloBoardObject):
         utils.log()
@@ -60,6 +59,14 @@ class TestBoards(object):
 
         r = trelloBoardObject.putBoardId(self.board_ids[0], query_params)
         assert str(new_desc) == r.json()[self.board_description_key]
+
+    def test_updateBoardDescriptionBlank(self, trelloMember, trelloBoardObject):
+        utils.log()
+        new_desc = ''
+        query_params = {self.board_description_key: new_desc}
+        r = trelloBoardObject.putBoardId(self.board_ids[0], query_params)
+        utils.log(r.text)
+        assert new_desc == r.json()[self.board_description_key]
 
 
     ## Get Methods
