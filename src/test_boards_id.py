@@ -68,6 +68,14 @@ class TestBoards(object):
         utils.log(r.text)
         assert new_desc == r.json()[self.board_description_key]
 
+    def test_updateBoardDescriptionSpecialCharacter(self, trelloMember, trelloBoardObject):
+        utils.log()
+        new_desc = '<!@#$%^&*()_+-=>'
+        query_params = {self.board_description_key: new_desc}
+        r = trelloBoardObject.putBoardId(self.board_ids[0], query_params)
+        utils.log(r.text)
+        assert new_desc == r.json()[self.board_description_key]
+
 
     ## Get Methods
     def getBoardMembership(self, trelloMember):
